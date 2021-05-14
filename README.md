@@ -1,6 +1,13 @@
 # Timebomb
 
-**TODO: Add description**
+ETS backed delayed action scheduler written in Elixir & Erlang.
+
+Ever wanted to implement something like how UberEats and Deliveroo ping you with a notification if you don't checkout after X time?
+
+## TODO:
+- Tests
+- Disarm functionality
+- Publish on Hex
 
 ## Installation
 
@@ -18,4 +25,3 @@ end
 Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at [https://hexdocs.pm/timebomb](https://hexdocs.pm/timebomb).
-
