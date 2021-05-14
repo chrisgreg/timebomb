@@ -17,8 +17,7 @@ defmodule Timebomb do
   end
 
   def handle_cast({:spark, opts}, state) do
-    [fuse: fuse_time, bomb: bomb] = opts
-    id = opts[:id] || UUID.uuid4()
+    [id: id, fuse: fuse_time, bomb: bomb] = opts
     code = :erlang.term_to_binary(bomb) |> Base.url_encode64()
     :ets.insert(@table, {id, code})
     :timer.send_after(fuse_time, self(), {:explode, id})
@@ -39,6 +38,10 @@ defmodule Timebomb do
   end
 
   def spark(opts) do
+    id = opts[:id] || UUID.uuid4()
+    opts = Keyword.put(opts, :id, id)
+
     GenServer.cast(__MODULE__, {:spark, opts})
+    id
   end
 end
