@@ -3,6 +3,11 @@ defmodule Timebomb do
 
   @moduledoc """
   Documentation for `Timebomb`.
+
+  ETS backed delayed action scheduler.
+
+  #TODO: Disarm functionality using ID
+  #TODO: Tests
   """
 
   @table :timebomb
