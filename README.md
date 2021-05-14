@@ -4,6 +4,16 @@ ETS backed delayed action scheduler written in Elixir & Erlang.
 
 Ever wanted to implement something like how UberEats and Deliveroo ping you with a notification if you don't checkout after X time?
 
+## Example usage:
+
+```elixir
+  timed_function = IO.inspect("BOOM")
+  Timebomb.spark(fuse: 10_000, bomb: timed_function)
+  
+  ...10 seconds later
+  BOOM
+```
+
 ## TODO:
 - Tests
 - Disarm functionality
