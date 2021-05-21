@@ -22,27 +22,29 @@ end
 Sparking a fuse on an action
 
 ```elixir
-  )> Timebomb.start_link
-  {:ok, #PID<0.200.0>}
-  > id = Timebomb.spark(fuse: 10_000, bomb: 1+5)
-  "53b45c7f-8bde-4d24-ae99-a6f215bb7104"
+Timebomb.start_link
+{:ok, #PID<0.200.0>}
 
-  ...10 seconds later
+Timebomb.spark(fuse: 10_000, bomb: 1+5)
+  
+...10 seconds later
 
-  6
+6
 ```
 
 
 Stopping a payload from firing
 
 ```elixir
-  > Timebomb.start_link
-  {:ok, #PID<0.200.0>}
-  > id = Timebomb.spark(fuse: 10_000, bomb: 1+5)
-  "53b45c7f-8bde-4d24-ae99-a6f215bb7104"
-  > Timebomb.disarm(id)
-  Payload disarmed
-  :ok
+Timebomb.start_link
+{:ok, #PID<0.200.0>}
+
+id = Timebomb.spark(fuse: 10_000, bomb: 1+5)
+"53b45c7f-8bde-4d24-ae99-a6f215bb7104"
+
+Timebomb.disarm(id)
+Payload disarmed
+:ok
 ```
 
 ## TODO:
