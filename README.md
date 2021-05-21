@@ -6,7 +6,6 @@ Ever wanted to implement something like how UberEats and Deliveroo ping you with
 
 ## TODO:
 - Tests
-- Disarm functionality
 - Publish on Hex
 
 ## Installation
@@ -21,6 +20,35 @@ def deps do
   ]
 end
 ```
+
+## Example Usage
+
+Sparking a fuse on an action
+
+```elixir
+  )> Timebomb.start_link
+  {:ok, #PID<0.200.0>}
+  > id = Timebomb.spark(fuse: 10_000, bomb: 1+5)
+  "53b45c7f-8bde-4d24-ae99-a6f215bb7104"
+
+  ...10 seconds later
+
+  6
+```
+
+
+Stopping a payload from firing
+
+```elixir
+  > Timebomb.start_link
+  {:ok, #PID<0.200.0>}
+  > id = Timebomb.spark(fuse: 10_000, bomb: 1+5)
+  "53b45c7f-8bde-4d24-ae99-a6f215bb7104"
+  > Timebomb.disarm(id)
+  Payload disarmed
+  :ok
+```
+
 
 Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can

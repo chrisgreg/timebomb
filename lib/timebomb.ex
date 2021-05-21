@@ -31,15 +31,35 @@ defmodule Timebomb do
   end
 
   def handle_info({:explode, id}, state) do
-    [{_, payload}] = :ets.lookup(@table, id)
+    case find_payload(id) do
+      [{_, payload}] ->
+        {:ok, code} = payload |> Base.url_decode64()
 
-    {:ok, code} = payload |> Base.url_decode64()
+        code
+        |> :erlang.binary_to_term()
+        |> IO.inspect()
 
-    code
-    |> :erlang.binary_to_term()
-    |> IO.inspect()
+      [] ->
+        nil
+    end
 
     {:noreply, state}
+  end
+
+  def handle_cast({:disarm, id}, state) do
+    case :ets.delete(@table, id) do
+      true ->
+        IO.puts("Payload disarmed")
+
+      false ->
+        IO.puts("Unable to disarm")
+    end
+
+    {:noreply, state}
+  end
+
+  defp find_payload(id) do
+    :ets.lookup(@table, id)
   end
 
   def spark(opts) do
@@ -48,5 +68,9 @@ defmodule Timebomb do
 
     GenServer.cast(__MODULE__, {:spark, opts})
     id
+  end
+
+  def disarm(id) do
+    GenServer.cast(__MODULE__, {:disarm, id})
   end
 end
